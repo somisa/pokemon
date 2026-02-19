@@ -1,33 +1,75 @@
 {
-    "name": "somisa/pokemon",
-    "version": "1.0",
-    "description": "This is my first Laravel package using pokeapi.co",
-    "keywords": ["somisa", "laravel", "Pokemon", "Pokeapi"],
-    "type": "library",
-    "require": {
-        "php": "^8.0",
-        "illuminate/support": "^8.0|^9.0|^10.0|^11.0|^12.0"
-    },
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "App\\": "app/",
-            "Somisa\\Pokemon\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "András Somos",
-            "email": "info@somisa.hu", 
-            "homepage": "https://www.somisa.hu"
-        }
-    ],
-    "minimum-stability": "stable",
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Somisa\\Pokemon\\PokemonServiceProvider"
-            ]
-        }
+  "name": "somisa/pokemon",
+  "description": "Laravel package for the PokeAPI (pokeapi.co)",
+  "keywords": ["somisa", "laravel", "pokemon", "pokeapi"],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "role": "Developer",
+      "name": "András Somos",
+      "email": "info@somisa.hu",
+      "homepage": "https://www.somisa.hu"
     }
+  ],
+  "require": {
+    "php": "^8.2",
+    "illuminate/support": "^11.0|^12.0"
+  },
+  "require-dev": {
+    "laravel/pint": "^1.0",
+    "orchestra/testbench": "^9.0|^10.0",
+    "pestphp/pest": "^3.0",
+    "pestphp/pest-plugin-laravel": "^3.0",
+    "pestphp/pest-plugin-type-coverage": "^3.0",
+    "phpstan/phpstan": "^2.0",
+    "roave/security-advisories": "dev-latest"
+  },
+  "autoload": {
+    "psr-4": {
+      "Somisa\\Pokemon\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Somisa\\Pokemon\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Somisa\\Pokemon\\PokemonServiceProvider"
+      ],
+      "aliases": {
+        "Pokemon": "Somisa\\Pokemon\\Facades\\Pokemon"
+      }
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "scripts": {
+    "dump": [
+      "composer dump-autoload --optimize --classmap-authoritative --strict-psr"
+    ],
+    "pint": [
+      "./vendor/bin/pint"
+    ],
+    "stan": [
+      "./vendor/bin/phpstan analyse --memory-limit=3g"
+    ],
+    "test": [
+      "./vendor/bin/pest"
+    ],
+    "types": [
+      "./vendor/bin/pest --type-coverage"
+    ]
+  }
 }
